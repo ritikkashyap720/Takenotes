@@ -32,7 +32,6 @@ function checkTheme() {
 // delete all notes
 function deleteAllNotes() {
     localStorage.clear()
-    console.log("working");
     showNotes();
 }
 // button functions 
@@ -107,13 +106,10 @@ saveBtn.addEventListener("click", function (e) {
     let titleColor = colorP.innerHTML;
     if (titleColor == "") {
         titleColor = "var(--navbar)";
-        console.log(titleColor);
+     
 
     }
-    else {
-        console.log("not empty");
-
-    }
+   
 
     if (notes == null) {
         notesObj = [];
@@ -134,7 +130,7 @@ saveBtn.addEventListener("click", function (e) {
             localStorage.setItem("notes", JSON.stringify(notesObj));
             addText.value = "";
             addTitle.value = "";
-            console.log("working")
+          
             addTextWarning.style.display = "none";
             addTitleWarning.style.display = "none";
             closenote();
@@ -187,10 +183,6 @@ function editnoteBtn(id) {
     editNotePickedColor.style.boxShadow = "none";
     editColorP.innerHTML = titleColor;
 
-    console.log(editTitle.value)
-    console.log(editText.value)
-    console.log(titleColor)
-    // console.log(notesObj[id].color)
     showNotes();
 }
 // function run on pressing save button
@@ -198,7 +190,7 @@ function editnoteBtn(id) {
 const editTitleWarning = document.getElementById("edit-title-warning")
 const editTextWarning = document.getElementById("edit-text-warning")
 function editNote() {
-    console.log(idPasser.innerHTML);
+   
     let id = idPasser.innerHTML;
 
 
@@ -217,13 +209,10 @@ function editNote() {
 
     if (titleColor == " ") {
         titleColor = "var(--navbar)";
-        console.log(titleColor);
+       
 
     }
-    else {
-        console.log("not empty");
-
-    }
+   
     if(editTitle.value!=""){
         if(editText.value!=""){
             notesObj[id].title = editTitle.value;
@@ -317,7 +306,7 @@ function showNotes() {
 
 // Function to delete a note
 function deleteNote(index) {
-    //   console.log("I am deleting", index);
+  
 
     let notes = localStorage.getItem("notes");
     if (notes == null) {
@@ -336,8 +325,7 @@ function deleteNote(index) {
 // get color 
 
 function getColor(id, no) {
-    console.log(id);
-    console.log(no);
+   
 
     const colors = ["#fb8ba7", "#4fc1ff", "#00bb79", "#ab5ba7", "#ffbc59"];
 
@@ -354,7 +342,7 @@ function getColor(id, no) {
     notesObj[id].color = colors[no];
     localStorage.setItem("notes", JSON.stringify(notesObj));
 
-    console.log(notesObj[0].color);
+    
 
     showNotes();
 }
@@ -455,7 +443,7 @@ let searchText = document.getElementById('searchTxt');
 searchText.addEventListener("input", function () {
 
     let inputVal = searchText.value.toLowerCase();
-    // console.log('Input event fired!', inputVal);
+ 
     let noteCards = document.getElementsByClassName('notes-body');
     Array.from(noteCards).forEach(function (element) {
         let cardTxt = element.getElementsByTagName("p")[0].innerText;
@@ -467,6 +455,6 @@ searchText.addEventListener("input", function () {
         else {
             element.style.display = "none";
         }
-        // console.log(cardTxt);
+     
     })
 })
