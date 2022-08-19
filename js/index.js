@@ -19,14 +19,14 @@ let openId = document.getElementById("open-id-passer");
 showNotes();
 checkTheme();
 // checking themes
-function checkTheme(){
-  let theme = localStorage.getItem("notesTheme")
-  if(theme=="dark"){
-    darkMode();
-  }
-  else{
-    lightMode();
-  }
+function checkTheme() {
+    let theme = localStorage.getItem("notesTheme")
+    if (theme == "dark") {
+        darkMode();
+    }
+    else {
+        lightMode();
+    }
 }
 
 // delete all notes
@@ -41,7 +41,7 @@ function lightMode() {
     body.classList.add("light-theme");
     lightBtn.style.display = "none";
     darkBtn.style.display = "block";
-    localStorage.setItem("notesTheme","light")
+    localStorage.setItem("notesTheme", "light")
 
 }
 function darkMode() {
@@ -49,7 +49,7 @@ function darkMode() {
     body.classList.add("dark-theme");
     lightBtn.style.display = "block";
     darkBtn.style.display = "none";
-    localStorage.setItem("notesTheme","dark")
+    localStorage.setItem("notesTheme", "dark")
 }
 
 function addnote() {
@@ -57,7 +57,7 @@ function addnote() {
     notesContainer.style.display = "none";
     closeBtn.style.display = "block"
     addBtn.style.display = "none"
-    openContainer.style.display="none";
+    openContainer.style.display = "none";
 
 }
 function closenote() {
@@ -67,7 +67,7 @@ function closenote() {
     addBtn.style.display = "block"
     closeBtn.style.display = "none"
     editNoteCcontainer.style.display = "none";
-    openContainer.style.display="none";
+    openContainer.style.display = "none";
     showNotes();
 }
 
@@ -90,10 +90,14 @@ function giveColor(color) {
     editNotePickedColor.innerHTML = " ";
     editNotePickedColor.style.boxShadow = "none";
     // passing color to open note
-   
+
 }
 
 // adding note
+// warnings
+
+const addTitleWarning = document.getElementById("add-title-warning")
+const addTextWarning = document.getElementById("add-text-warning")
 
 let saveBtn = document.getElementById("savenote");
 saveBtn.addEventListener("click", function (e) {
@@ -101,7 +105,6 @@ saveBtn.addEventListener("click", function (e) {
     let addText = document.getElementById("addText");
     let notes = localStorage.getItem("notes");
     let titleColor = colorP.innerHTML;
-    console.log(titleColor);
     if (titleColor == "") {
         titleColor = "var(--navbar)";
         console.log(titleColor);
@@ -117,18 +120,39 @@ saveBtn.addEventListener("click", function (e) {
     } else {
         notesObj = JSON.parse(notes);
     }
-    let myObj = {
-        title: addTitle.value,
-        text: addText.value,
-        color: titleColor
+
+    // checking if title is empty or note
+    if (addTitle.value != "") {
+        if (addText.value != "") {
+
+            let myObj = {
+                title: addTitle.value,
+                text: addText.value,
+                color: titleColor
+            }
+            notesObj.push(myObj);
+            localStorage.setItem("notes", JSON.stringify(notesObj));
+            addText.value = "";
+            addTitle.value = "";
+            console.log("working")
+            addTextWarning.style.display = "none";
+            addTitleWarning.style.display = "none";
+            closenote();
+            showNotes();
+            
+        }
+        else {
+            addTextWarning.style.display = "block";
+            
+        }
     }
-    notesObj.push(myObj);
-    localStorage.setItem("notes", JSON.stringify(notesObj));
-    addText.value = "";
-    addTitle.value = "";
-    console.log(notesObj);
-    closenote();
-    showNotes();
+    else {
+        addTitleWarning.style.display = "block";
+       
+    }
+
+
+
 })
 
 // editnote button function
@@ -138,7 +162,7 @@ function editnoteBtn(id) {
     editNoteCcontainer.style.display = "flex";
     closeBtn.style.display = "block";
     addBtn.style.display = "none";
-    openContainer.style.display="none";
+    openContainer.style.display = "none";
     idPasser.innerHTML = id;
 
     let editTitle = document.getElementById("editTitle");
@@ -170,8 +194,9 @@ function editnoteBtn(id) {
     showNotes();
 }
 // function run on pressing save button
-
-
+// edit warning
+const editTitleWarning = document.getElementById("edit-title-warning")
+const editTextWarning = document.getElementById("edit-text-warning")
 function editNote() {
     console.log(idPasser.innerHTML);
     let id = idPasser.innerHTML;
@@ -180,7 +205,7 @@ function editNote() {
     let editTitle = document.getElementById("editTitle");
     let editText = document.getElementById("editText");
     let notes = localStorage.getItem("notes");
-    let titleColor = editColorP.innerHTML ;
+    let titleColor = editColorP.innerHTML;
 
     if (notes == null) {
         notesObj = [];
@@ -189,7 +214,7 @@ function editNote() {
     }
 
 
-  
+
     if (titleColor == " ") {
         titleColor = "var(--navbar)";
         console.log(titleColor);
@@ -199,16 +224,31 @@ function editNote() {
         console.log("not empty");
 
     }
+    if(editTitle.value!=""){
+        if(editText.value!=""){
+            notesObj[id].title = editTitle.value;
+            notesObj[id].text = editText.value;
+            notesObj[id].color = titleColor
+        
+            localStorage.setItem("notes", JSON.stringify(notesObj));
+            editText.value = "";
+            editTitle.value = "";
+            editTitleWarning.style.display="none";
+            editTextWarning.style.display="none";
 
-    notesObj[id].title = editTitle.value;
-    notesObj[id].text = editText.value;
-    notesObj[id].color =titleColor
-   
-    localStorage.setItem("notes", JSON.stringify(notesObj));
-    editText.value = "";
-    editTitle.value = "";
-    closenote();
-    showNotes();
+            closenote();
+            showNotes();
+        }
+        else{
+            editTextWarning.style.display="block";
+        }
+    }
+    else{
+        editTitleWarning.style.display="block";
+
+    }
+
+    
 }
 
 
@@ -265,11 +305,11 @@ function showNotes() {
         <div class="details">
             <h1>Hey, welcome to Takenotes 😊.</h1>
             <p>You can add notes your here.</p>
-            <p>Add yor first note by clicking on <strong>Add</strong> note icon.</p>
+            <p>Add your first note by clicking on <strong>Add</strong> note icon.</p>
             <p>Your added notes will appear here.</p>
         </div>
     </div>`;
-       
+
     }
 
 
@@ -301,7 +341,7 @@ function getColor(id, no) {
 
     const colors = ["#fb8ba7", "#4fc1ff", "#00bb79", "#ab5ba7", "#ffbc59"];
 
-   
+
 
     let notes = localStorage.getItem("notes");
     if (notes == null) {
@@ -309,11 +349,11 @@ function getColor(id, no) {
     } else {
         notesObj = JSON.parse(notes);
     }
-    
-  
-    notesObj[id].color= colors[no];
+
+
+    notesObj[id].color = colors[no];
     localStorage.setItem("notes", JSON.stringify(notesObj));
-    
+
     console.log(notesObj[0].color);
 
     showNotes();
@@ -322,14 +362,14 @@ function getColor(id, no) {
 // open note
 
 
-function openNoteBtn(id){
-   openId.innerHTML = id;
-   openContainer.style.display ="flex";
-   openNote();
-   showNotes();
+function openNoteBtn(id) {
+    openId.innerHTML = id;
+    openContainer.style.display = "flex";
+    openNote();
+    showNotes();
 }
 
-function openNote(){
+function openNote() {
     let shortTitle = document.getElementById("short-title");
     let longTitle = document.getElementById("long-title");
     let openNoteText = document.getElementById("open-note-text");
@@ -347,50 +387,50 @@ function openNote(){
     shortTitle.innerHTML = notesObj[id].title;
     longTitle.innerHTML = notesObj[id].title;
     openNoteText.innerHTML = notesObj[id].text;
-    titlebar.style.backgroundColor= notesObj[id].color;
+    titlebar.style.backgroundColor = notesObj[id].color;
 
-  
-    
+
+
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
     showNotes();
 }
-function openColor(color){
+function openColor(color) {
     id = openId.innerHTML;
-    
+
     let notes = localStorage.getItem("notes");
     if (notes == null) {
         notesObj = [];
     } else {
         notesObj = JSON.parse(notes);
     }
-    
-    notesObj[id].color= color;
+
+    notesObj[id].color = color;
     localStorage.setItem("notes", JSON.stringify(notesObj));
     showNotes();
     openNote();
 }
 // deleting notes from open
 
-function deleteNoteOpen(){
+function deleteNoteOpen() {
     id = openId.innerHTML;
     deleteNote(id);
     closeOpenNote();
-    openContainer.style.display ="none";
+    openContainer.style.display = "none";
     showNotes();
 }
 
-function closeOpenNote(){
-    openContainer.style.display="none";
-    notesContainer.style.display="grid";
+function closeOpenNote() {
+    openContainer.style.display = "none";
+    notesContainer.style.display = "grid";
     showNotes();
 }
 
-function editOpenNote(){
+function editOpenNote() {
     id = openId.innerHTML;
 
-    openContainer.style.display="none";
-    notesContainer.style.display="grid";
+    openContainer.style.display = "none";
+    notesContainer.style.display = "grid";
     editnoteBtn(id);
     showNotes();
 }
@@ -399,32 +439,32 @@ function editOpenNote(){
 const search = document.getElementById("search");
 const openSearchBtn = document.getElementById("open-search")
 const closeSearchBtn = document.getElementById("close-search")
-function openSearch(){
-    search.style.display="flex";
-    openSearchBtn.style.display="none";
-    closeSearchBtn.style.display="block";
+function openSearch() {
+    search.style.display = "flex";
+    openSearchBtn.style.display = "none";
+    closeSearchBtn.style.display = "block";
 }
-function closeSearch(){
-    closeSearchBtn.style.display="none";
-    openSearchBtn.style.display="block";
-    search.style.display="none";
+function closeSearch() {
+    closeSearchBtn.style.display = "none";
+    openSearchBtn.style.display = "block";
+    search.style.display = "none";
 
 }
 
 let searchText = document.getElementById('searchTxt');
-searchText.addEventListener("input", function(){
+searchText.addEventListener("input", function () {
 
     let inputVal = searchText.value.toLowerCase();
     // console.log('Input event fired!', inputVal);
     let noteCards = document.getElementsByClassName('notes-body');
-    Array.from(noteCards).forEach(function(element){
+    Array.from(noteCards).forEach(function (element) {
         let cardTxt = element.getElementsByTagName("p")[0].innerText;
         let cardTitle = element.getElementsByTagName("h3")[0].innerText;
-        if(cardTxt.includes(inputVal)||cardTitle.includes(inputVal)){
+        if (cardTxt.includes(inputVal) || cardTitle.includes(inputVal)) {
             element.style.display = "block";
         }
-      
-        else{
+
+        else {
             element.style.display = "none";
         }
         // console.log(cardTxt);
