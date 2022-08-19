@@ -6,7 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Takenotes</title>
-    <link rel="stylesheet" href="css/index.css">
+     <link rel="icon" type="image/x-icon" href="logo.png">
+     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
@@ -14,12 +15,15 @@
 <body class="light-theme">
 
     <div class="navbar">
-        <a href="#">Takenotes</a>
+         <div class="brand">
+            <img src="logo.png" alt="">
+            <a href="#">Takenotes</a>
+        </div>
         <ul class="links">
             <li onclick="openSearch()" id="open-search"><span class="material-symbols-outlined">search</span></li>
             <li onclick="closeSearch()" id="close-search" style="display: none;"><span
-                class="material-symbols-outlined"><span class="material-symbols-outlined">
-                    search_off
+                    class="material-symbols-outlined"><span class="material-symbols-outlined">
+                        search_off
                     </span></span></li>
             <li id="addBtn" onclick="addnote()"><span class="material-symbols-outlined">add</span></li>
             <li id="closeBtn" onclick="closenote()" style="display: none;"><span
@@ -35,7 +39,7 @@
             </li>
         </ul>
     </div>
-  
+
     <div class="container">
         <!-- blank -->
         <div class="blank"></div>
@@ -44,10 +48,11 @@
             <div class="search-parent">
                 <span class="material-symbols-outlined">
                     search
-                    </span>
-                <input class="input-search" id="searchTxt" type="search" placeholder="Search your note here.." aria-label="Search">
+                </span>
+                <input class="input-search" id="searchTxt" type="search" placeholder="Search your note here.."
+                    aria-label="Search">
             </div>
-        
+
         </div>
         <!-- add note -->
         <div class="addnote" id="addnote" style="display: none;">
@@ -78,7 +83,13 @@
                         </ul>
                     </li>
                 </div>
+                <p clas="warning" id="add-title-warning" style="display: none; color: rgba(255, 0, 0, 0.808);
+                font-size: 16px;
+                font-weight: bold;">Title cannot be empty</p>
                 <textarea class="add-text" id="addText" id="w3review" name="w3review" rows="6"></textarea>
+                <p clas="warning hidden "  id="add-text-warning"  style="display: none; color: rgba(255, 0, 0, 0.808);
+                font-size: 16px;
+                font-weight: bold;">Text cannot be empty</p>
                 <div class="buttons">
                     <button class="note-btn addnote-btn" id="savenote">Save</button>
                     <button onclick="closenote()" class="note-btn cancel-btn">Cancel</button>
@@ -116,7 +127,13 @@
                         </ul>
                     </li>
                 </div>
+                <p clas="warning hidden "  id="edit-title-warning"  style="display: none; color: rgba(255, 0, 0, 0.808);
+                font-size: 16px;
+                font-weight: bold;">Title cannot be empty</p>
                 <textarea class="add-text" id="editText" name="w3review" rows="6"></textarea>
+                <p clas="warning hidden "  id="edit-text-warning" style="display: none; color: rgba(255, 0, 0, 0.808);
+                font-size: 16px;
+                font-weight: bold;">Text cannot be empty</p>
                 <div class="buttons">
                     <button class="note-btn addnote-btn" onclick="editNote()" id="editnote">Edit</button>
                     <button onclick="closenote()" class="note-btn cancel-btn">Cancel</button>
@@ -131,7 +148,7 @@
                 <div class="titlebar" id="titlebar">
                     <h3 id="short-title"></h3>
                     <ul class="open-icons">
-                        
+
                         <li onclick=" editOpenNote()" class="icons edit-note"><span
                                 class="material-symbols-outlined">edit_note</span></li>
                         <li class="icons color-pick ">
@@ -172,7 +189,7 @@
 
 
 
-  <script src="js/index.js"></script>
+    <script src="js/index.js"></script>
 </body>
 
 </html>
