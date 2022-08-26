@@ -538,13 +538,7 @@ hr{
         grid-template-columns: auto auto auto;
 
     }
-    .widgetBar{
-        display: block !important;
-        height: 30px;
-        width: 100%;
-        border: 1px solid var(--navbar);
-        background-color: var(--navbar);
-    }
+  
 }
 
 @media screen and (min-device-width: 480px) and (max-device-width: 768px) {
@@ -553,13 +547,6 @@ hr{
         padding: 0px 20px 20px 20px;
         grid-template-columns: auto auto;
         
-    }
-    .widgetBar{
-        display: block !important;
-        height: 30px;
-        width: 100%;
-        border: 1px solid var(--navbar);
-        background-color: var(--navbar);
     }
   
 }
@@ -582,12 +569,6 @@ hr{
 .open-container{
     margin: 20px;
    }
-   .widgetBar{
-    display: block !important;
-    height: 30px;
-    width: 100%;
-    background-color: var(--navbar);
-    border: 1px solid var(--navbar);
-}
+  
  
 }
