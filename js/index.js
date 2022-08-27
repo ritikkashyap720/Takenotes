@@ -23,7 +23,7 @@ const splashScreen = document.getElementById("splash-screen");
 
 setTimeout(() => {
     splashScreen.classList.add("hide-Splash-Screen")
-}, 1500);
+}, 2000);
 
 
 showNotes();
