@@ -15,6 +15,16 @@ const editNoteCcontainer = document.getElementById("editnote")
 let openContainer = document.getElementById("open-note");
 let openId = document.getElementById("open-id-passer");
 
+// intro screen
+
+const splashScreen = document.getElementById("splash-screen");
+
+
+
+setTimeout(() => {
+    splashScreen.classList.add("hide-Splash-Screen")
+}, 1000);
+
 
 showNotes();
 checkTheme();
