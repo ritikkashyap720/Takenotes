@@ -130,7 +130,7 @@ body {
 .notes-container {
     display: grid;
     padding: 0px 50px 50px 50px;
-    grid-template-columns: auto auto auto auto auto;
+    grid-template-columns: 50% 50% 50% 50% 50%;
     transition: 0.2s ease-in-out;
 }
 
@@ -607,20 +607,20 @@ hr {
 
 /* media query start from here */
 
-@media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+@media screen and (max-width: 1024px) {
     .notes-container {
         display: grid;
         padding: 0px 20px 20px 20px;
-        grid-template-columns: auto auto auto;
+        grid-template-columns: 33% 33% 33%;
 
     }
 }
 
-@media screen and (min-device-width: 480px) and (max-device-width: 768px) {
+@media screen and (max-width: 768px) {
     .notes-container {
         display: grid;
         padding: 0px 20px 20px 20px;
-        grid-template-columns: auto auto;
+        grid-template-columns: 505 50%;
 
     }
 
@@ -628,7 +628,7 @@ hr {
 
 }
 
-@media screen and (max-device-width: 480px) and (orientation: portrait) {
+@media screen and (max-width: 480px) and (orientation: portrait) {
     .notes-container {
         display: grid;
         padding: 0px 20px 20px 20px;
