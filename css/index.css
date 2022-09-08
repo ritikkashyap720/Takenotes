@@ -620,7 +620,7 @@ hr {
     .notes-container {
         display: grid;
         padding: 0px 20px 20px 20px;
-        grid-template-columns: 505 50%;
+        grid-template-columns: 50% 50%;
 
     }
 
