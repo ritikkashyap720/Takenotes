@@ -7,7 +7,7 @@ Takenotes is build with pure html, css and javascript. This app have abilty to s
     
 # Features	
 
- - You add your notes with title.
+ - You can add your notes with title.
  - Give colour to your notes.
  - Edit notes
  - Edit notes color
